@@ -3,6 +3,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
+import '../widgets/my_book_name_container.dart';
+
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
   Future getHadiths() async {
@@ -14,6 +16,26 @@ class HomeScreen extends StatelessWidget {
     } else {
       throw Exception("Data Loading Error");
     }
+  }
+
+  bookName(hadiths) {
+    return GridView.builder(
+      itemCount: 8,
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        crossAxisSpacing: 4,
+        childAspectRatio: 0.8,
+      ),
+      itemBuilder: (context, index) {
+        return GestureDetector(
+          onTap: () {},
+          child: MyBookNameContainer(
+            hadiths: hadiths,
+            index: index,
+          ),
+        );
+      },
+    );
   }
 
   @override
@@ -30,7 +52,23 @@ class HomeScreen extends StatelessWidget {
           height: size.height,
           width: size.width,
           padding: EdgeInsets.only(top: 16, left: 6, right: 6),
-          
+          child: FutureBuilder(
+            future: getHadiths(),
+            builder: (BuildContext context, AsyncSnapshot sn) {
+              if (sn.hasData) {
+                List hadiths = sn.data;
+                return bookName(hadiths);
+              }
+              if (sn.hasError) {
+                return Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            },
+          ),
         ),
       ),
     );
