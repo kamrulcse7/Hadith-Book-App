@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.hadith_book">
    <application
-        android:label="hadith_book"
+        android:label="Hadith Book"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
