@@ -32,7 +32,7 @@ class MyHadithRangeContainer extends StatelessWidget {
         leading: Image.asset("assets/images/logo.png"),
         title: Padding(
           padding: const EdgeInsets.only(bottom: 6.0),
-          child: Text("${hadith_range[index]["nameBengali"]}"),
+          child: Text("${hadith_range[index]["nameBengali"]}", textAlign: TextAlign.justify,),
         ),
         subtitle: Text(
             "হাদিস নম্বর: ${hadith_range[index]["range_start"]} - ${hadith_range[index]["range_end"]}"),

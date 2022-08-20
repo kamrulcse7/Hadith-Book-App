@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-// import 'package:hadith_book/screens/hadiths_screen.dart';
+import 'package:hadith_book/screens/hadiths_screen.dart';
 import 'package:hadith_book/widgets/my_hadith_range_container.dart';
 import 'package:http/http.dart' as http;
 
@@ -36,16 +36,16 @@ class HadithsRangeScreen extends StatelessWidget {
           ),
           child: GestureDetector(
             onTap: () {
-              // Navigator.of(context).push(
-              //   MaterialPageRoute(
-              //     builder: (context) => HadithsScreen(
-              //       chapterNo: hadith_range[index]["chSerial"],
-              //       bookName: hadith_range[index]["bookInitial"],
-              //       bookNameBangla: bookNameBangla,
-              //       chNameBangla: hadith_range[index]["nameBengali"],
-              //     ),
-              //   ),
-              // );
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => HadithsScreen(
+                    chapterNo: hadith_range[index]["chSerial"],
+                    bookName: hadith_range[index]["bookInitial"],
+                    bookNameBangla: bookNameBangla,
+                    chNameBangla: hadith_range[index]["nameBengali"],
+                  ),
+                ),
+              );
             },
             child: MyHadithRangeContainer(
               hadith_range: hadith_range,
