@@ -1,9 +1,9 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 import '../widgets/my_book_name_container.dart';
+import 'hadiths_range_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -28,7 +28,16 @@ class HomeScreen extends StatelessWidget {
       ),
       itemBuilder: (context, index) {
         return GestureDetector(
-          onTap: () {},
+          onTap: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => HadithsRangeScreen(
+                  bookname: hadiths[index]["book_key"],
+                  bookNameBangla: hadiths[index]["nameBengali"],
+                ),
+              ),
+            );
+          },
           child: MyBookNameContainer(
             hadiths: hadiths,
             index: index,
@@ -40,17 +49,17 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.green[50],
         appBar: AppBar(
-          title: Text('হাদিসের বইসমূহ'),
+          title: Text('হাদিস বইসমূহ', style: TextStyle(fontSize: 16.0),),
           elevation: 0,
+          centerTitle: true,
         ),
         body: Container(
-          height: size.height,
-          width: size.width,
+          height: double.infinity,
+          width: double.infinity,
           padding: EdgeInsets.only(top: 16, left: 6, right: 6),
           child: FutureBuilder(
             future: getHadiths(),
@@ -61,7 +70,10 @@ class HomeScreen extends StatelessWidget {
               }
               if (sn.hasError) {
                 return Center(
-                  child: CircularProgressIndicator(),
+                  child: Container(
+                    width: 35.0,
+                    child: CircularProgressIndicator(),
+                  ),
                 );
               }
               return Center(
